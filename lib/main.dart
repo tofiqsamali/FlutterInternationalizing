@@ -1,15 +1,23 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
 // import 'package:flutter_cupertino_localizations/flutter_cupertino_localizations.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+      DevicePreview(
+        enabled: true,
+        builder: (context) => MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: DevicePreview.of(context).locale, // <--- Add the locale
+      builder: DevicePreview.appBuilder, // <--- Add the builder
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         AppLocalizationsDelegate(),
@@ -45,7 +53,7 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Text(
           AppLocalizations.of(context).hello,
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ),
     );
